@@ -1,0 +1,922 @@
+<!doctype html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cuối Tuần Đi Đâu? - Gợi ý cuối tuần cho gia đình</title>
+        <meta
+            name="description"
+            content="Lên kế hoạch cuối tuần trong 3 phút. Gợi ý được chọn lọc theo tuổi con — không phải lướt Facebook hay hỏi group."
+        />
+
+        <!-- Open Graph -->
+        <meta
+            property="og:title"
+            content="Cuối Tuần Đi Đâu? - Lên kế hoạch cuối tuần trong 3 phút"
+        />
+        <meta
+            property="og:description"
+            content="Gợi ý được chọn lọc theo tuổi con — không phải lướt Facebook hay hỏi group."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="vi_VN" />
+        <meta property="og:url" content="https://cuoituandidau.vn/" />
+        <meta
+            property="og:image"
+            content="https://cuoituandidau.vn/assets/images/hero-banner-desktop.png"
+        />
+
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+            name="twitter:title"
+            content="Cuối Tuần Đi Đâu? - Lên kế hoạch cuối tuần trong 3 phút"
+        />
+        <meta
+            name="twitter:description"
+            content="Gợi ý được chọn lọc theo tuổi con — không phải lướt Facebook hay hỏi group."
+        />
+        <meta
+            name="twitter:image"
+            content="https://cuoituandidau.vn/assets/images/hero-banner-desktop.png"
+        />
+
+        <link rel="canonical" href="https://cuoituandidau.vn/" />
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- Compiled TailwindCSS -->
+        <link rel="stylesheet" href="assets/css/styles.css" />
+
+        <!-- LCP Image Preloads -->
+        <link rel="preload" as="image" type="image/webp" href="assets/images/hero-banner-mobile.webp" media="(max-width: 1023px)" />
+        <link rel="preload" as="image" type="image/webp" href="assets/images/hero-banner-desktop.webp" media="(min-width: 1024px)" />
+
+        <!-- JSON-LD -->
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "Organization",
+                        "name": "Cuối Tuần Đi Đâu",
+                        "url": "https://cuoituandidau.vn",
+                        "logo": "https://cuoituandidau.vn/assets/images/app-icon.png",
+                        "contactPoint": {
+                            "@type": "ContactPoint",
+                            "email": "hello@cuoituandidau.vn",
+                            "contactType": "customer service",
+                            "availableLanguage": "Vietnamese"
+                        }
+                    },
+                    {
+                        "@type": "MobileApplication",
+                        "name": "Cuối Tuần Đi Đâu?",
+                        "operatingSystem": "iOS, Android",
+                        "applicationCategory": "LifestyleApplication",
+                        "description": "Ứng dụng giúp phụ huynh Việt Nam tìm địa điểm cuối tuần phù hợp cho gia đình.",
+                        "offers": {
+                            "@type": "Offer",
+                            "price": "0",
+                            "priceCurrency": "VND"
+                        },
+                        "inLanguage": "vi"
+                    }
+                ]
+            }
+        </script>
+
+    </head>
+    <body class="bg-white text-text-primary antialiased">
+        <!-- Navigation -->
+        <nav
+            id="navbar"
+            class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border-default"
+        >
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <!-- Logo -->
+                    <a href="index.html" class="flex items-center gap-2.5">
+                        <picture>
+                            <source srcset="assets/images/app-icon-72.webp" type="image/webp" />
+                            <img
+                                src="assets/images/app-icon-72.png"
+                                alt="Cuối Tuần Đi Đâu"
+                                width="72"
+                                height="72"
+                                class="w-9 h-9 rounded-xl"
+                            />
+                        </picture>
+                        <span class="text-lg font-bold text-text-primary"
+                            >Cuối Tuần Đi Đâu?</span
+                        >
+                    </a>
+
+                    <!-- Desktop Links -->
+                    <div class="hidden md:flex items-center gap-8">
+                        <a
+                            href="#features"
+                            class="nav-link text-sm font-medium text-text-secondary hover:text-text-primary transition-colors"
+                            >Tính năng</a
+                        >
+                        <a
+                            href="#download"
+                            class="nav-link text-sm font-medium text-text-secondary hover:text-text-primary transition-colors"
+                            >Tải ứng dụng</a
+                        >
+                        <a
+                            href="#contact"
+                            class="nav-link text-sm font-medium text-text-secondary hover:text-text-primary transition-colors"
+                            >Liên hệ</a
+                        >
+                    </div>
+
+                    <!-- Mobile Hamburger -->
+                    <button
+                        id="menu-toggle"
+                        class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+                        aria-label="Menu"
+                        aria-expanded="false"
+                    >
+                        <svg
+                            id="menu-icon-open"
+                            class="w-6 h-6 text-text-primary"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M4 6h16M4 12h16M4 18h16"
+                            />
+                        </svg>
+                        <svg
+                            id="menu-icon-close"
+                            class="w-6 h-6 text-text-primary hidden"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M6 18L18 6M6 6l12 12"
+                            />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Overlay -->
+            <div
+                id="mobile-menu"
+                class="hidden md:hidden bg-white border-b border-border-default"
+            >
+                <div class="px-4 py-4 space-y-3">
+                    <a
+                        href="#features"
+                        class="block text-base font-medium text-text-secondary hover:text-primary py-2"
+                        >Tính năng</a
+                    >
+                    <a
+                        href="#download"
+                        class="block text-base font-medium text-text-secondary hover:text-primary py-2"
+                        >Tải ứng dụng</a
+                    >
+                    <a
+                        href="#contact"
+                        class="block text-base font-medium text-text-secondary hover:text-primary py-2"
+                        >Liên hệ</a
+                    >
+                </div>
+            </div>
+        </nav>
+
+        <main>
+        <!-- Hero Section -->
+        <section class="overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
+                <div
+                    class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16"
+                >
+                    <!-- Mobile Hero Image (shown above text on mobile) -->
+                    <div class="lg:hidden w-full">
+                        <picture>
+                            <source srcset="assets/images/hero-banner-mobile.webp" type="image/webp" />
+                            <img
+                                src="assets/images/hero-banner-mobile.png"
+                                alt="Cuối Tuần Đi Đâu app"
+                                width="385"
+                                height="481"
+                                fetchpriority="high"
+                                class="w-full max-w-md mx-auto rounded-card"
+                            />
+                        </picture>
+                    </div>
+
+                    <!-- Text Content -->
+                    <div class="flex-1 text-center lg:text-left">
+                        <h1
+                            class="text-4xl lg:text-5xl font-bold text-text-primary leading-tight tracking-tight"
+                        >
+                            Lên kế hoạch cuối tuần<br class="hidden sm:block" />
+                            trong 3 phút
+                        </h1>
+                        <p
+                            class="mt-5 text-lg text-text-tertiary max-w-lg mx-auto lg:mx-0"
+                        >
+                            Gợi ý được chọn lọc theo tuổi con - không phải lướt
+                            cả trăm bài trên Facebook hay hỏi mãi trên group.
+                        </p>
+
+                        <!-- Store Buttons -->
+                        <div
+                            class="mt-8 flex flex-col sm:flex-row items-center gap-3 justify-center lg:justify-start"
+                        >
+                            <a
+                                href="https://testflight.apple.com/join/abfrzXm7"
+                                class="inline-flex items-center gap-3 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors"
+                            >
+                                <svg aria-hidden="true"
+                                    class="w-7 h-7"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+                                    />
+                                </svg>
+                                <div class="text-left">
+                                    <div
+                                        class="text-[10px] leading-none opacity-80"
+                                    >
+                                        Tải về trên
+                                    </div>
+                                    <div
+                                        class="text-base font-semibold leading-tight"
+                                    >
+                                        App Store
+                                    </div>
+                                </div>
+                            </a>
+                            <a
+                                href="https://github.com/studium-ignotum/weekend-go-android-distribution/releases/download/v1.0.6/v1.0.6.apk"
+                                class="inline-flex items-center gap-3 bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors"
+                            >
+                                <svg aria-hidden="true"
+                                    class="w-7 h-7"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-1.4l2.533 1.467a1 1 0 010 1.733l-2.197 1.272-2.543-2.543 2.207-1.929zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"
+                                    />
+                                </svg>
+                                <div class="text-left">
+                                    <div
+                                        class="text-[10px] leading-none opacity-80"
+                                    >
+                                        Tải về trên
+                                    </div>
+                                    <div
+                                        class="text-base font-semibold leading-tight"
+                                    >
+                                        Google Play
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Trust Badge -->
+                        <div
+                            class="mt-6 flex items-center gap-2 justify-center lg:justify-start text-text-tertiary"
+                        >
+                            <svg aria-hidden="true"
+                                class="w-5 h-5 text-primary"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                                />
+                            </svg>
+                            <span class="text-sm font-medium"
+                                >LUÔN MIỄN PHÍ CHO PHỤ HUYNH</span
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Desktop Hero Image -->
+                    <div class="hidden lg:block flex-1">
+                        <picture>
+                            <source srcset="assets/images/hero-banner-desktop.webp" type="image/webp" />
+                            <img
+                                src="assets/images/hero-banner-desktop.png"
+                                alt="Cuối Tuần Đi Đâu app"
+                                width="801"
+                                height="480"
+                                fetchpriority="high"
+                                class="w-full max-w-lg rounded-card"
+                            />
+                        </picture>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Value Proposition Strip -->
+        <section class="bg-bg-secondary border-y border-border-default">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Benefit 1 -->
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center"
+                        >
+                            <svg aria-hidden="true"
+                                class="w-6 h-6 text-primary"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                                />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-text-primary">
+                                3-5 gợi ý được chọn lọc
+                            </div>
+                            <div class="text-sm text-text-tertiary mt-0.5">
+                                Không quá tải thông tin
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Benefit 2 -->
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center"
+                        >
+                            <svg aria-hidden="true"
+                                class="w-6 h-6 text-primary"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                                />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-text-primary">
+                                Cá nhân hoá theo tuổi con
+                            </div>
+                            <div class="text-sm text-text-tertiary mt-0.5">
+                                Phù hợp với từng lứa tuổi
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Benefit 3 -->
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center"
+                        >
+                            <svg aria-hidden="true"
+                                class="w-6 h-6 text-primary"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                                />
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                                />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-text-primary">
+                                Chỉ đường đến bãi đậu xe
+                            </div>
+                            <div class="text-sm text-text-tertiary mt-0.5">
+                                Không phải cổng chính
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-16 lg:py-24">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2
+                        class="text-3xl lg:text-4xl font-bold text-text-primary"
+                    >
+                        Tính năng nổi bật
+                    </h2>
+                    <p
+                        class="mt-4 text-lg text-text-tertiary max-w-2xl mx-auto"
+                    >
+                        Mọi thứ bạn cần để lên kế hoạch cuối tuần hoàn hảo cho
+                        gia đình.
+                    </p>
+                </div>
+
+                <div
+                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10"
+                >
+                    <!-- Feature 1: Hồ sơ gia đình -->
+                    <div>
+                        <div
+                            class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary/10 mb-4"
+                        >
+                            <svg aria-hidden="true"
+                                class="w-6 h-6 text-primary"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                                />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-text-primary">
+                            Hồ sơ gia đình
+                        </h3>
+                        <p class="mt-2 text-text-tertiary">
+                            Nhập tuổi các bé để nhận gợi ý phù hợp nhất.
+                        </p>
+                    </div>
+
+                    <!-- Feature 2: Gợi ý cá nhân hoá -->
+                    <div>
+                        <div
+                            class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary/10 mb-4"
+                        >
+                            <svg aria-hidden="true"
+                                class="w-6 h-6 text-primary"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                                />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-text-primary">
+                            Gợi ý cá nhân hoá
+                        </h3>
+                        <p class="mt-2 text-text-tertiary">
+                            3-5 địa điểm được chọn lọc mỗi tuần, không quá tải.
+                        </p>
+                    </div>
+
+                    <!-- Feature 3: Thông tin địa điểm tập trung -->
+                    <div>
+                        <div
+                            class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary/10 mb-4"
+                        >
+                            <svg aria-hidden="true"
+                                class="w-6 h-6 text-primary"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"
+                                />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-text-primary">
+                            Thông tin địa điểm tập trung
+                        </h3>
+                        <p class="mt-2 text-text-tertiary">
+                            Độ tuổi, bãi đậu xe, năng lượng, thời tiết — một nơi
+                            duy nhất.
+                        </p>
+                    </div>
+
+                    <!-- Feature 4: Chỉ đường đến địa điểm -->
+                    <div>
+                        <div
+                            class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary/10 mb-4"
+                        >
+                            <svg aria-hidden="true"
+                                class="w-6 h-6 text-primary"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"
+                                />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-text-primary">
+                            Chỉ đường đến địa điểm
+                        </h3>
+                        <p class="mt-2 text-text-tertiary">
+                            Một chạm đến đúng nơi đậu xe, không phải cổng chính.
+                        </p>
+                    </div>
+
+                    <!-- Feature 5: Chia sẻ khoảnh khắc -->
+                    <div>
+                        <div
+                            class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary/10 mb-4"
+                        >
+                            <svg aria-hidden="true"
+                                class="w-6 h-6 text-primary"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+                                />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-text-primary">
+                            Chia sẻ khoảnh khắc
+                        </h3>
+                        <p class="mt-2 text-text-tertiary">
+                            Đăng bài và chia sẻ trải nghiệm cuối tuần với bạn
+                            bè.
+                        </p>
+                    </div>
+
+                    <!-- Feature 6: Đánh giá từ phụ huynh -->
+                    <div>
+                        <div
+                            class="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary/10 mb-4"
+                        >
+                            <svg aria-hidden="true"
+                                class="w-6 h-6 text-primary"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                                />
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-text-primary">
+                            Đánh giá từ phụ huynh
+                        </h3>
+                        <p class="mt-2 text-text-tertiary">
+                            Mẹo hay từ phụ huynh đã trải nghiệm thực tế.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="bg-bg-secondary py-16 lg:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-14">
+                    <h2
+                        class="text-3xl lg:text-4xl font-bold text-text-primary"
+                    >
+                        Cách hoạt động
+                    </h2>
+                    <p class="mt-4 text-lg text-text-tertiary">
+                        Chỉ 3 bước đơn giản để bắt đầu.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+                    <!-- Step 1 -->
+                    <div class="text-center">
+                        <div
+                            class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary text-white text-xl font-bold mb-5"
+                        >
+                            1
+                        </div>
+                        <h3 class="text-xl font-bold text-text-primary mb-2">
+                            Tạo hồ sơ gia đình
+                        </h3>
+                        <p class="text-text-tertiary">
+                            Nhập thông tin các bé và sở thích của gia đình để
+                            nhận gợi ý chính xác.
+                        </p>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="text-center">
+                        <div
+                            class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary text-white text-xl font-bold mb-5"
+                        >
+                            2
+                        </div>
+                        <h3 class="text-xl font-bold text-text-primary mb-2">
+                            Nhận gợi ý mỗi tuần
+                        </h3>
+                        <p class="text-text-tertiary">
+                            Mỗi tuần, bạn sẽ nhận 3-5 địa điểm được chọn lọc phù
+                            hợp với gia đình.
+                        </p>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="text-center">
+                        <div
+                            class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary text-white text-xl font-bold mb-5"
+                        >
+                            3
+                        </div>
+                        <h3 class="text-xl font-bold text-text-primary mb-2">
+                            Đi và chia sẻ
+                        </h3>
+                        <p class="text-text-tertiary">
+                            Trải nghiệm địa điểm và chia sẻ cảm nhận với cộng
+                            đồng phụ huynh.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download CTA -->
+        <section id="download" class="bg-[#15803d] py-16 lg:py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <picture>
+                    <source srcset="assets/images/app-icon-160.webp" type="image/webp" />
+                    <img
+                        src="assets/images/app-icon-160.png"
+                        alt="Cuối Tuần Đi Đâu"
+                        width="160"
+                        height="160"
+                        loading="lazy"
+                        class="w-20 h-20 rounded-2xl mx-auto mb-6 shadow-lg"
+                    />
+                </picture>
+                <h2 class="text-3xl lg:text-4xl font-bold text-white">
+                    Tải ứng dụng ngay
+                </h2>
+                <p class="mt-4 text-lg text-white max-w-xl mx-auto">
+                    Bắt đầu lên kế hoạch cuối tuần cho gia đình bạn. Hoàn toàn
+                    miễn phí.
+                </p>
+
+                <div
+                    class="mt-8 flex flex-col sm:flex-row items-center gap-3 justify-center"
+                >
+                    <a
+                        href="https://testflight.apple.com/join/abfrzXm7"
+                        class="inline-flex items-center gap-3 bg-white text-text-primary px-6 py-3 rounded-xl hover:bg-gray-100 transition-colors"
+                    >
+                        <svg aria-hidden="true"
+                            class="w-7 h-7"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                        >
+                            <path
+                                d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"
+                            />
+                        </svg>
+                        <div class="text-left">
+                            <div class="text-[10px] leading-none opacity-75">
+                                Tải về trên
+                            </div>
+                            <div class="text-base font-semibold leading-tight">
+                                App Store
+                            </div>
+                        </div>
+                    </a>
+                    <a
+                        href="https://github.com/studium-ignotum/weekend-go-android-distribution/releases/download/v1.0.6/v1.0.6.apk"
+                        class="inline-flex items-center gap-3 bg-white text-text-primary px-6 py-3 rounded-xl hover:bg-gray-100 transition-colors"
+                    >
+                        <svg aria-hidden="true"
+                            class="w-7 h-7"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                        >
+                            <path
+                                d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 01-.61-.92V2.734a1 1 0 01.609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-1.4l2.533 1.467a1 1 0 010 1.733l-2.197 1.272-2.543-2.543 2.207-1.929zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"
+                            />
+                        </svg>
+                        <div class="text-left">
+                            <div class="text-[10px] leading-none opacity-75">
+                                Tải về trên
+                            </div>
+                            <div class="text-base font-semibold leading-tight">
+                                Google Play
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer id="contact" class="bg-footer-bg text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <!-- Brand -->
+                    <div>
+                        <div class="flex items-center gap-2.5 mb-4">
+                            <picture>
+                                <source srcset="assets/images/app-icon-72.webp" type="image/webp" />
+                                <img
+                                    src="assets/images/app-icon-72.png"
+                                    alt="Cuối Tuần Đi Đâu"
+                                    width="72"
+                                    height="72"
+                                    loading="lazy"
+                                    class="w-9 h-9 rounded-xl"
+                                />
+                            </picture>
+                            <span class="text-lg font-bold"
+                                >Cuối Tuần Đi Đâu?</span
+                            >
+                        </div>
+                        <p class="text-gray-400 text-sm leading-relaxed">
+                            Ứng dụng giúp phụ huynh Việt Nam tìm địa điểm cuối
+                            tuần phù hợp cho gia đình. Có mặt tại Hà Nội và TP.
+                            Hồ Chí Minh.
+                        </p>
+                    </div>
+
+                    <!-- Legal Links -->
+                    <div>
+                        <h3 class="font-semibold mb-4">Pháp lý</h4>
+                        <ul class="space-y-2.5">
+                            <li>
+                                <a
+                                    href="terms.html"
+                                    class="text-gray-400 hover:text-white transition-colors text-sm"
+                                    >Điều khoản Sử dụng</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="privacy.html"
+                                    class="text-gray-400 hover:text-white transition-colors text-sm"
+                                    >Chính sách Bảo mật</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="community-standards.html"
+                                    class="text-gray-400 hover:text-white transition-colors text-sm"
+                                    >Tiêu chuẩn Cộng đồng</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact -->
+                    <div>
+                        <h3 class="font-semibold mb-4">Liên hệ</h4>
+                        <ul class="space-y-2.5">
+                            <li>
+                                <a
+                                    href="mailto:hello@cuoituandidau.vn"
+                                    class="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2"
+                                >
+                                    <svg aria-hidden="true"
+                                        class="w-4 h-4"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                                        />
+                                    </svg>
+                                    hello@cuoituandidau.vn
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- Social Links Placeholder -->
+                        <div class="flex items-center gap-4 mt-6">
+                            <a
+                                href="#"
+                                class="text-gray-400 hover:text-white transition-colors"
+                                aria-label="Facebook"
+                            >
+                                <svg aria-hidden="true"
+                                    class="w-5 h-5"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                                    />
+                                </svg>
+                            </a>
+                            <a
+                                href="#"
+                                class="text-gray-400 hover:text-white transition-colors"
+                                aria-label="Instagram"
+                            >
+                                <svg aria-hidden="true"
+                                    class="w-5 h-5"
+                                    fill="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"
+                                    />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-700 mt-10 pt-8 text-center">
+                    <p class="text-gray-400 text-sm">
+                        &copy; 2025 Cuối Tuần Đi Đâu. Tất cả quyền được bảo lưu.
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Mobile Menu Script -->
+        <script>
+            const menuToggle = document.getElementById("menu-toggle");
+            const mobileMenu = document.getElementById("mobile-menu");
+            const iconOpen = document.getElementById("menu-icon-open");
+            const iconClose = document.getElementById("menu-icon-close");
+
+            menuToggle.addEventListener("click", () => {
+                const isOpen = !mobileMenu.classList.contains("hidden");
+                mobileMenu.classList.toggle("hidden");
+                iconOpen.classList.toggle("hidden");
+                iconClose.classList.toggle("hidden");
+                menuToggle.setAttribute("aria-expanded", !isOpen);
+            });
+
+            // Close mobile menu when clicking a link
+            mobileMenu.querySelectorAll("a").forEach((link) => {
+                link.addEventListener("click", () => {
+                    mobileMenu.classList.add("hidden");
+                    iconOpen.classList.remove("hidden");
+                    iconClose.classList.add("hidden");
+                    menuToggle.setAttribute("aria-expanded", "false");
+                });
+            });
+        </script>
+    </body>
+</html>
