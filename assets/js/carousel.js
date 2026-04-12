@@ -21,8 +21,8 @@ let centerIndex = 0;
 let animating = false;
 let autoTimer;
 
-// CoverFlow position configs
-const COVERFLOW_POSITIONS = [
+// CoverFlow position configs (5 visible + hidden for any extras)
+const VISIBLE_POSITIONS = [
   // DOM index 0: far-left (-2)
   { scale: 0.55, rotateY: 55,  translateX: -420, opacity: 0.4, zIndex: 2  },
   // DOM index 1: left (-1)
@@ -33,11 +33,12 @@ const COVERFLOW_POSITIONS = [
   { scale: 0.75, rotateY: -40, translateX: 230,  opacity: 0.7, zIndex: 5  },
   // DOM index 4: far-right (+2)
   { scale: 0.55, rotateY: -55, translateX: 420,  opacity: 0.4, zIndex: 2  },
-  // DOM index 5: hidden (behind)
-  { scale: 0.5,  rotateY: 0,   translateX: 0,    opacity: 0,   zIndex: 0  },
-  // DOM index 6: hidden (behind)
-  { scale: 0.5,  rotateY: 0,   translateX: 0,    opacity: 0,   zIndex: 0  },
 ];
+const HIDDEN_POSITION = { scale: 0.5, rotateY: 0, translateX: 0, opacity: 0, zIndex: 0 };
+
+function getPosition(domIndex) {
+  return domIndex < VISIBLE_POSITIONS.length ? VISIBLE_POSITIONS[domIndex] : HIDDEN_POSITION;
+}
 
 function reorderDOM() {
   // Place 5 visible items (center ± 2) + remaining hidden
@@ -69,7 +70,7 @@ function applyPositions(transition) {
   const items = carousel.querySelectorAll(".phone-item");
   const spread = getSpreadScale();
   items.forEach((phone, domIndex) => {
-    const pos = COVERFLOW_POSITIONS[domIndex];
+    const pos = getPosition(domIndex);
     const tx = Math.round(pos.translateX * spread);
     if (transition) {
       phone.style.transition = `transform ${ANIMATION_DURATION_MS}ms cubic-bezier(0.4, 0, 0.2, 1), opacity ${ANIMATION_DURATION_MS}ms cubic-bezier(0.4, 0, 0.2, 1)`;
@@ -87,23 +88,23 @@ function goTo(newCenter, direction) {
   animating = true;
   centerIndex = newCenter;
 
-  // 1. Disable transitions, reorder DOM
-  applyPositions(false);
+  // 1. Reorder DOM to new center
   reorderDOM();
 
   // 2. Set starting positions (shifted by direction) without transition
   const items = carousel.querySelectorAll(".phone-item");
   const spread = getSpreadScale();
+  const totalPositions = VISIBLE_POSITIONS.length + (total - VISIBLE_POSITIONS.length);
   const shift = direction === 1 ? 1 : -1;
   items.forEach((phone, domIndex) => {
     // Start from the adjacent position (simulates where items were before the move)
-    const fromIdx = Math.max(0, Math.min(COVERFLOW_POSITIONS.length - 1, domIndex + shift));
-    const fromPos = COVERFLOW_POSITIONS[fromIdx];
+    const fromIdx = Math.max(0, Math.min(totalPositions - 1, domIndex + shift));
+    const fromPos = getPosition(fromIdx);
     const tx = Math.round(fromPos.translateX * spread);
     phone.style.transition = 'none';
     phone.style.transform = `translate(-50%, -50%) translateX(${tx}px) scale(${fromPos.scale}) rotateY(${fromPos.rotateY}deg)`;
     phone.style.opacity = fromPos.opacity;
-    phone.style.zIndex = COVERFLOW_POSITIONS[domIndex].zIndex;
+    phone.style.zIndex = getPosition(domIndex).zIndex;
   });
 
   // 3. Force reflow
@@ -143,8 +144,20 @@ document.getElementById("carousel-prev")?.addEventListener("click", () => {
 function startAutoPlay() {
   autoTimer = setInterval(goNext, AUTOPLAY_INTERVAL_MS);
 }
-function resetAutoPlay() {
+function stopAutoPlay() {
   clearInterval(autoTimer);
+}
+function resetAutoPlay() {
+  stopAutoPlay();
   startAutoPlay();
 }
 startAutoPlay();
+
+// Pause autoplay when tab is not visible
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    stopAutoPlay();
+  } else {
+    resetAutoPlay();
+  }
+});
