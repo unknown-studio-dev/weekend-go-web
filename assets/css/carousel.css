@@ -1,0 +1,18 @@
+#phone-carousel {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  height: 520px;
+}
+@media (min-width: 640px) {
+  #phone-carousel { height: 580px; }
+}
+@media (min-width: 1024px) {
+  #phone-carousel { height: 680px; }
+}
+.phone-item {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
