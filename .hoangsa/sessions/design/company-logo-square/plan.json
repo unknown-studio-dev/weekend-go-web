@@ -1,0 +1,26 @@
+{
+  "name": "design: Company logo vuông + cùng size LinkedIn",
+  "workspace_dir": "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web",
+  "spec_ref": "company_logo_square-spec-v1.0",
+  "language": "html-tailwindcss",
+  "budget_tokens": 8000,
+  "tasks": [
+    {
+      "id": "T-01",
+      "name": "Remove rounded-full and border from company logo img class",
+      "complexity": "low",
+      "budget_tokens": 8000,
+      "namespace": null,
+      "files": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/index.html"
+      ],
+      "depends_on": [],
+      "context_pointers": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/index.html:1297-1318",
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/.hoangsa/sessions/design/company-logo-square/DESIGN-SPEC.md"
+      ],
+      "covers": ["REQ-01", "REQ-02", "REQ-03", "REQ-04"],
+      "acceptance": "cd '/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web' && [ \"$(grep -E 'company_logo\\.jpg.*rounded-full' index.html | wc -l | tr -d ' ')\" = \"0\" ] && [ \"$(grep -E 'company_logo\\.jpg.*border' index.html | wc -l | tr -d ' ')\" = \"0\" ] && grep -q 'src=\"assets/images/company_logo.jpg\" alt=\"Unknown Studio\" class=\"w-4 h-4 object-cover\"' index.html"
+    }
+  ]
+}
