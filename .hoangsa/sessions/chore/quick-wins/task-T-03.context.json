@@ -1,0 +1,25 @@
+{
+  "acceptance": [
+    "cd '/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web' && grep -qF 'node_modules/' .gitignore && grep -qF '.env' .gitignore && grep -qF '.hoangsa/' .gitignore && grep -qF '.claude/' .gitignore"
+  ],
+  "conventions_subset": {
+    "async_pattern": "async/await",
+    "error_handling": "try-catch + { error } return",
+    "naming": "camelCase functions, snake_case JSON",
+    "test_framework": "node:test"
+  },
+  "dependency_signatures": [],
+  "description": "Extend .gitignore with node_modules, .env, .hoangsa, .claude",
+  "estimated_tokens": 242,
+  "file_segments": [
+    {
+      "action": "MODIFY",
+      "end_line": 3,
+      "lines": "CLAUDE.md\n*.DS_Store\n.gitnexus\n",
+      "path": "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/.gitignore",
+      "start_line": 1
+    }
+  ],
+  "task_id": "T-03",
+  "task_name": "Extend .gitignore with node_modules, .env, .hoangsa, .claude"
+}

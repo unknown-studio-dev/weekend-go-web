@@ -1,0 +1,76 @@
+{
+  "name": "chore: Theme 1 quick wins (9 micro-fixes)",
+  "workspace_dir": "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web",
+  "spec_ref": "quick_wins-spec-v1.0",
+  "language": "html-tailwindcss-js",
+  "budget_tokens": 36000,
+  "tasks": [
+    {
+      "id": "T-01",
+      "name": "HTML edits across 4 pages (h4 typos, mailto utility, contrast, OG, carousel labels, inline style)",
+      "complexity": "medium",
+      "budget_tokens": 18000,
+      "namespace": null,
+      "files": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/index.html",
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/terms.html",
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/privacy.html",
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/community-standards.html"
+      ],
+      "depends_on": [],
+      "context_pointers": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/.hoangsa/sessions/chore/quick-wins/RESEARCH.md",
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/.hoangsa/sessions/chore/quick-wins/DESIGN-SPEC.md"
+      ],
+      "covers": ["REQ-01", "REQ-03", "REQ-04", "REQ-05", "REQ-08", "REQ-09"],
+      "acceptance": "cd '/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web' && [ \"$(grep -cE '<h3[^>]*>[^<]*</h4>' terms.html privacy.html community-standards.html | awk -F: '{s+=$2} END {print s}')\" = '0' ] && [ \"$(grep -c '^[[:space:]]*<style>' index.html)\" = '0' ] && [ \"$(grep -cE 'text-\\[#22c55e\\][[:space:]]+hover:text-\\[#166534\\]' terms.html privacy.html community-standards.html | awk -F: '{s+=$2} END {print s}')\" = '0' ] && [ \"$(grep -c 'text-xs text-gray-500 mb-2' index.html)\" = '0' ] && [ \"$(grep -c 'aria-label=\"Ảnh trước\"' index.html)\" = '1' ] && [ \"$(grep -c 'aria-label=\"Ảnh tiếp\"' index.html)\" = '1' ] && [ \"$(grep -E '(og:image|twitter:image)' index.html | grep -c '.webp')\" = '0' ]"
+    },
+    {
+      "id": "T-02",
+      "name": "JS micro-cleanup in carousel.js (totalPositions inline + autoTimer guard)",
+      "complexity": "low",
+      "budget_tokens": 8000,
+      "namespace": null,
+      "files": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/assets/js/carousel.js"
+      ],
+      "depends_on": [],
+      "context_pointers": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/assets/js/carousel.js",
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/.hoangsa/sessions/chore/quick-wins/DESIGN-SPEC.md"
+      ],
+      "covers": ["REQ-06", "REQ-07"],
+      "acceptance": "cd '/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web' && grep -q 'const totalPositions = total;' assets/js/carousel.js && ! grep -q 'VISIBLE_POSITIONS\\.length + (total - VISIBLE_POSITIONS\\.length)' assets/js/carousel.js && awk '/function startAutoPlay/,/^}/' assets/js/carousel.js | grep -q 'clearInterval(autoTimer)'"
+    },
+    {
+      "id": "T-03",
+      "name": "Extend .gitignore with node_modules, .env, .hoangsa, .claude",
+      "complexity": "low",
+      "budget_tokens": 4000,
+      "namespace": null,
+      "files": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/.gitignore"
+      ],
+      "depends_on": [],
+      "context_pointers": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/.gitignore"
+      ],
+      "covers": ["REQ-02"],
+      "acceptance": "cd '/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web' && grep -qF 'node_modules/' .gitignore && grep -qF '.env' .gitignore && grep -qF '.hoangsa/' .gitignore && grep -qF '.claude/' .gitignore"
+    },
+    {
+      "id": "T-04",
+      "name": "Verify all REQs after T-01..T-03 complete",
+      "complexity": "low",
+      "budget_tokens": 6000,
+      "namespace": null,
+      "files": [],
+      "depends_on": ["T-01", "T-02", "T-03"],
+      "context_pointers": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/.hoangsa/sessions/chore/quick-wins/TEST-SPEC.md"
+      ],
+      "covers": ["REQ-01", "REQ-02", "REQ-03", "REQ-04", "REQ-05", "REQ-06", "REQ-07", "REQ-08", "REQ-09"],
+      "acceptance": "cd '/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web' && for p in 'node_modules/' '.env' '.hoangsa/' '.claude/'; do grep -qF \"$p\" .gitignore || exit 1; done && [ \"$(grep -cE '<h3[^>]*>[^<]*</h4>' terms.html privacy.html community-standards.html | awk -F: '{s+=$2} END {print s}')\" = '0' ] && [ \"$(grep -c '<style>' index.html)\" = '0' ] && grep -q 'const totalPositions = total;' assets/js/carousel.js"
+    }
+  ]
+}

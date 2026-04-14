@@ -1,0 +1,17 @@
+{
+  "acceptance": [
+    "cd '/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web' && for p in 'node_modules/' '.env' '.hoangsa/' '.claude/'; do grep -qF \"$p\" .gitignore || exit 1; done && [ \"$(grep -cE '<h3[^>]*>[^<]*</h4>' terms.html privacy.html community-standards.html | awk -F: '{s+=$2} END {print s}')\" = '0' ] && [ \"$(grep -c '<style>' index.html)\" = '0' ] && grep -q 'const totalPositions = total;' assets/js/carousel.js"
+  ],
+  "conventions_subset": {
+    "async_pattern": "async/await",
+    "error_handling": "try-catch + { error } return",
+    "naming": "camelCase functions, snake_case JSON",
+    "test_framework": "node:test"
+  },
+  "dependency_signatures": [],
+  "description": "Verify all REQs after T-01..T-03 complete",
+  "estimated_tokens": 225,
+  "file_segments": [],
+  "task_id": "T-04",
+  "task_name": "Verify all REQs after T-01..T-03 complete"
+}
