@@ -16,3 +16,11 @@
   transform-origin: center center;
   will-change: transform, opacity;
 }
+@media (prefers-reduced-motion: reduce) {
+  .phone-item {
+    transition: none !important;
+  }
+}
+#carousel-toggle .carousel-toggle-play { display: none; }
+#carousel-toggle[data-state="paused"] .carousel-toggle-pause { display: none; }
+#carousel-toggle[data-state="paused"] .carousel-toggle-play { display: inline-block; }

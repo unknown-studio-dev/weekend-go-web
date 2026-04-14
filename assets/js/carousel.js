@@ -140,19 +140,42 @@ document.getElementById("carousel-prev")?.addEventListener("click", () => {
   resetAutoPlay();
 });
 
-// Autoplay
+// Autoplay (respect prefers-reduced-motion)
+const reducedMotionMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
+let isPaused = reducedMotionMQ.matches;
+
 function startAutoPlay() {
   if (autoTimer) clearInterval(autoTimer);
+  if (isPaused) return;
   autoTimer = setInterval(goNext, AUTOPLAY_INTERVAL_MS);
 }
 function stopAutoPlay() {
   clearInterval(autoTimer);
+  autoTimer = null;
 }
 function resetAutoPlay() {
   stopAutoPlay();
   startAutoPlay();
 }
 startAutoPlay();
+
+function updateToggleUI() {
+  const btn = document.getElementById('carousel-toggle');
+  if (!btn) return;
+  btn.setAttribute('aria-label', isPaused ? 'Tiếp tục tự động chuyển ảnh' : 'Tạm dừng tự động chuyển ảnh');
+  btn.dataset.state = isPaused ? 'paused' : 'playing';
+}
+function togglePause() {
+  isPaused = !isPaused;
+  if (isPaused) stopAutoPlay();
+  else startAutoPlay();
+  updateToggleUI();
+}
+const toggleBtn = document.getElementById('carousel-toggle');
+if (toggleBtn) {
+  toggleBtn.addEventListener('click', togglePause);
+  updateToggleUI();
+}
 
 // Pause autoplay when tab is not visible
 document.addEventListener("visibilitychange", () => {
