@@ -51,8 +51,24 @@ let centerIndex = 0;
 let animating = false;
 let autoTimer;
 
+function getViewportMode() {
+  const w = window.innerWidth;
+  if (w < BREAKPOINT_XS) return 'mobile';
+  if (w < BREAKPOINT_MD) return 'tablet';
+  return 'desktop';
+}
+
+function getPositions() {
+  switch (getViewportMode()) {
+    case 'mobile':  return POSITIONS_MOBILE;
+    case 'tablet':  return POSITIONS_TABLET;
+    default:        return POSITIONS_DESKTOP;
+  }
+}
+
 function getPosition(domIndex) {
-  return domIndex < VISIBLE_POSITIONS.length ? VISIBLE_POSITIONS[domIndex] : HIDDEN_POSITION;
+  const positions = getPositions();
+  return domIndex < positions.length ? positions[domIndex] : HIDDEN;
 }
 
 function reorderDOM() {
@@ -72,30 +88,20 @@ function reorderDOM() {
   order.forEach(idx => carousel.appendChild(phones[idx]));
 }
 
-// Responsive scale factor for translateX
-function getSpreadScale() {
-  const w = window.innerWidth;
-  if (w < BREAKPOINT_XS) return SPREAD_XS;
-  if (w < BREAKPOINT_SM) return SPREAD_SM;
-  if (w < BREAKPOINT_LG) return SPREAD_LG;
-  return SPREAD_DEFAULT;
-}
-
 function applyPositions(transition) {
   const items = carousel.querySelectorAll(".phone-item");
-  const spread = getSpreadScale();
   items.forEach((phone, domIndex) => {
     const pos = getPosition(domIndex);
-    const tx = Math.round(pos.translateX * spread);
-    if (transition) {
-      phone.style.transition = `transform ${ANIMATION_DURATION_MS}ms cubic-bezier(0.4, 0, 0.2, 1), opacity ${ANIMATION_DURATION_MS}ms cubic-bezier(0.4, 0, 0.2, 1)`;
-    } else {
-      phone.style.transition = 'none';
-    }
-    phone.style.transform = `translate(-50%, -50%) translateX(${tx}px) scale(${pos.scale}) rotateY(${pos.rotateY}deg)`;
+    phone.style.transition = transition
+      ? `transform ${ANIMATION_DURATION_MS}ms cubic-bezier(0.4, 0, 0.2, 1), opacity ${ANIMATION_DURATION_MS}ms cubic-bezier(0.4, 0, 0.2, 1)`
+      : 'none';
+    phone.style.transform = `translate(-50%, -50%) translateX(${pos.translateX}px) scale(${pos.scale}) rotateY(${pos.rotateY}deg)`;
     phone.style.opacity = pos.opacity;
     phone.style.zIndex = pos.zIndex;
   });
+  // Expose state for tests
+  carousel.dataset.centerIndex = String(centerIndex);
+  carousel.dataset.viewportMode = getViewportMode();
 }
 
 function goTo(newCenter, direction) {
@@ -103,29 +109,21 @@ function goTo(newCenter, direction) {
   animating = true;
   centerIndex = newCenter;
 
-  // 1. Reorder DOM to new center
   reorderDOM();
 
-  // 2. Set starting positions (shifted by direction) without transition
   const items = carousel.querySelectorAll(".phone-item");
-  const spread = getSpreadScale();
-  const totalPositions = total;
   const shift = direction === 1 ? 1 : -1;
   items.forEach((phone, domIndex) => {
-    // Start from the adjacent position (simulates where items were before the move)
-    const fromIdx = Math.max(0, Math.min(totalPositions - 1, domIndex + shift));
+    const fromIdx = Math.max(0, Math.min(items.length - 1, domIndex + shift));
     const fromPos = getPosition(fromIdx);
-    const tx = Math.round(fromPos.translateX * spread);
     phone.style.transition = 'none';
-    phone.style.transform = `translate(-50%, -50%) translateX(${tx}px) scale(${fromPos.scale}) rotateY(${fromPos.rotateY}deg)`;
+    phone.style.transform = `translate(-50%, -50%) translateX(${fromPos.translateX}px) scale(${fromPos.scale}) rotateY(${fromPos.rotateY}deg)`;
     phone.style.opacity = fromPos.opacity;
     phone.style.zIndex = getPosition(domIndex).zIndex;
   });
 
-  // 3. Force reflow
   void carousel.offsetHeight;
 
-  // 4. Enable transitions, animate to correct positions
   applyPositions(true);
 
   setTimeout(() => {
@@ -155,6 +153,53 @@ document.getElementById("carousel-prev")?.addEventListener("click", () => {
   resetAutoPlay();
 });
 
+// Swipe gestures (mobile + tablet)
+let touchStart = null;
+let touchLock = 'none';
+
+function handleTouchStart(e) {
+  touchStart = {
+    x: e.touches[0].clientX,
+    y: e.touches[0].clientY,
+    t: performance.now(),
+  };
+  touchLock = 'none';
+}
+
+function handleTouchMove(e) {
+  if (!touchStart || touchLock !== 'none') return;
+  const dx = Math.abs(e.touches[0].clientX - touchStart.x);
+  const dy = Math.abs(e.touches[0].clientY - touchStart.y);
+  if (Math.max(dx, dy) < SWIPE_DEADZONE_PX) return;
+  // Lock direction: horizontal if dx/dy ratio above threshold, else vertical (release to page scroll)
+  touchLock = (dx / (dy || 0.0001) > SWIPE_LOCK_RATIO) ? 'horizontal' : 'vertical';
+  // NOTE: no preventDefault — touch-action: pan-y in CSS handles scroll intent
+}
+
+function handleTouchEnd(e) {
+  if (!touchStart) return;
+  if (touchLock !== 'horizontal') {
+    touchStart = null;
+    touchLock = 'none';
+    return;
+  }
+  const dx = e.changedTouches[0].clientX - touchStart.x;
+  const dt = performance.now() - touchStart.t;
+  const velocity = Math.abs(dx) / (dt || 1);
+  const threshold = Math.max(SWIPE_DISTANCE_MIN_PX, carousel.offsetWidth * SWIPE_DISTANCE_RATIO);
+  const triggered = Math.abs(dx) >= threshold || velocity >= SWIPE_VELOCITY_FLICK;
+  if (triggered) {
+    if (dx < 0) goNext(); else goPrev();
+    resetAutoPlay();
+  }
+  touchStart = null;
+  touchLock = 'none';
+}
+
+carousel.addEventListener('touchstart', handleTouchStart, { passive: true });
+carousel.addEventListener('touchmove',  handleTouchMove,  { passive: true });
+carousel.addEventListener('touchend',   handleTouchEnd,   { passive: true });
+
 // Autoplay (respect prefers-reduced-motion)
 const reducedMotionMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
 let isPaused = reducedMotionMQ.matches;
@@ -173,6 +218,9 @@ function resetAutoPlay() {
   startAutoPlay();
 }
 startAutoPlay();
+
+carousel.dataset.centerIndex = String(centerIndex);
+carousel.dataset.viewportMode = getViewportMode();
 
 // Pause autoplay when tab is not visible
 document.addEventListener("visibilitychange", () => {
