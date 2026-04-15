@@ -71,6 +71,35 @@ function getPosition(domIndex) {
   return domIndex < positions.length ? positions[domIndex] : HIDDEN;
 }
 
+function buildDots() {
+  const container = document.getElementById('carousel-dots');
+  if (!container) return;
+  // Idempotent: clear first
+  container.innerHTML = '';
+  for (let i = 0; i < total; i++) {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'carousel-dot';
+    dot.setAttribute('aria-label', `Ảnh ${i + 1}`);
+    dot.setAttribute('role', 'tab');
+    dot.addEventListener('click', () => {
+      if (getViewportMode() === 'mobile') return;  // decorative on mobile
+      if (i === centerIndex) return;
+      const direction = i > centerIndex ? 1 : -1;
+      goTo(i, direction);
+      resetAutoPlay();
+    });
+    container.appendChild(dot);
+  }
+}
+
+function updateDots(active) {
+  document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i === active);
+    dot.setAttribute('aria-selected', i === active ? 'true' : 'false');
+  });
+}
+
 function reorderDOM() {
   // Place 5 visible items (center ± 2) + remaining hidden
   const order = [];
@@ -102,6 +131,7 @@ function applyPositions(transition) {
   // Expose state for tests
   carousel.dataset.centerIndex = String(centerIndex);
   carousel.dataset.viewportMode = getViewportMode();
+  updateDots(centerIndex);
 }
 
 function goTo(newCenter, direction) {
@@ -142,6 +172,8 @@ function goPrev() {
 // Initial render
 reorderDOM();
 applyPositions(false);
+buildDots();
+updateDots(centerIndex);
 
 // Next / Prev buttons
 document.getElementById("carousel-next")?.addEventListener("click", () => {
@@ -200,6 +232,23 @@ carousel.addEventListener('touchstart', handleTouchStart, { passive: true });
 carousel.addEventListener('touchmove',  handleTouchMove,  { passive: true });
 carousel.addEventListener('touchend',   handleTouchEnd,   { passive: true });
 
+// Resize — debounced, re-apply layout when viewport mode changes
+let lastViewportMode = getViewportMode();
+let resizeTimer = null;
+function handleResize() {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    const current = getViewportMode();
+    if (current !== lastViewportMode) {
+      lastViewportMode = current;
+      applyPositions(true);
+    } else {
+      applyPositions(false);
+    }
+  }, 150);
+}
+window.addEventListener('resize', handleResize);
+
 // Autoplay (respect prefers-reduced-motion)
 const reducedMotionMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
 let isPaused = reducedMotionMQ.matches;
@@ -218,6 +267,14 @@ function resetAutoPlay() {
   startAutoPlay();
 }
 startAutoPlay();
+
+// Reduced-motion change listener — re-apply (no-op for mobile since it's already flat)
+reducedMotionMQ.addEventListener('change', (e) => {
+  isPaused = e.matches;
+  if (isPaused) stopAutoPlay(); else startAutoPlay();
+  // Desktop/tablet transforms are driven by POSITIONS arrays — don't need to change them here,
+  // but if user prefers reduced motion, it's a CSS concern (transition: none via @media).
+});
 
 carousel.dataset.centerIndex = String(centerIndex);
 carousel.dataset.viewportMode = getViewportMode();
