@@ -1,0 +1,62 @@
+{
+  "name": "refactor: carousel mobile → CSS scroll-snap",
+  "workspace_dir": "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web",
+  "spec_ref": "carousel_scroll_snap-spec-v1.0",
+  "language": "JavaScript",
+  "budget_tokens": 75000,
+  "tasks": [
+    {
+      "id": "T-01",
+      "name": "Update carousel.css — add mobile scroll-snap styles via @media (max-width: 767px)",
+      "complexity": "medium",
+      "budget_tokens": 15000,
+      "namespace": "assets/css",
+      "files": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/assets/css/carousel.css"
+      ],
+      "depends_on": [],
+      "context_pointers": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/assets/css/carousel.css:1-92",
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/.hoangsa/sessions/refactor/carousel-scroll-snap/DESIGN-SPEC.md"
+      ],
+      "covers": ["REQ-01", "REQ-02", "REQ-03", "REQ-04", "REQ-05", "REQ-08", "REQ-13"],
+      "acceptance": "node -e \"const c = require('fs').readFileSync('assets/css/carousel.css','utf8'); ['scroll-snap-type: x mandatory','scroll-snap-align: center','scroll-behavior: smooth','75%','20px','scrollbar-width: none','max-width: 767px'].forEach(k=>{ if(!c.includes(k)){console.error('MISSING:',k);process.exit(1);}}); console.log('OK');\""
+    },
+    {
+      "id": "T-02",
+      "name": "Refactor carousel.js — add scroll-snap mode (init/destroy, scrollToIndex, handleScrollEnd, clones, dual-mode conditionals)",
+      "complexity": "high",
+      "budget_tokens": 35000,
+      "namespace": "assets/js",
+      "files": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/assets/js/carousel.js"
+      ],
+      "depends_on": [],
+      "context_pointers": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/assets/js/carousel.js:1-290",
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/.hoangsa/sessions/refactor/carousel-scroll-snap/DESIGN-SPEC.md"
+      ],
+      "covers": ["REQ-01", "REQ-06", "REQ-07", "REQ-09", "REQ-10", "REQ-11", "REQ-12", "REQ-13"],
+      "acceptance": "node -e \"const c = require('fs').readFileSync('assets/js/carousel.js','utf8'); ['initScrollMode','destroyScrollMode','scrollToIndex','handleScrollEnd','isScrollMode','cloneFirst','cloneLast','scrollend','aria-hidden'].forEach(k=>{ if(!c.includes(k)){console.error('MISSING:',k);process.exit(1);}}); console.log('OK');\""
+    },
+    {
+      "id": "T-03",
+      "name": "Rebuild HTML + rewrite Playwright tests for scroll-snap + verify all pass",
+      "complexity": "high",
+      "budget_tokens": 25000,
+      "namespace": "tests/visual",
+      "files": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/tests/visual/carousel-mobile.spec.js",
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/index.html"
+      ],
+      "depends_on": ["T-01", "T-02"],
+      "context_pointers": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/tests/visual/carousel-mobile.spec.js",
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/playwright.config.js",
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/.hoangsa/sessions/refactor/carousel-scroll-snap/TEST-SPEC.md"
+      ],
+      "covers": ["REQ-01", "REQ-02", "REQ-03", "REQ-04", "REQ-05", "REQ-06", "REQ-07", "REQ-08", "REQ-09", "REQ-10", "REQ-11", "REQ-12", "REQ-13"],
+      "acceptance": "npm run build && npx playwright test tests/visual/carousel-mobile.spec.js --update-snapshots && npx playwright test tests/visual/pages.spec.js --project=mobile --update-snapshots && npx playwright test"
+    }
+  ]
+}
