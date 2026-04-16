@@ -1,0 +1,61 @@
+{
+  "name": "refactor: carousel mobile real-time interpolation",
+  "workspace_dir": "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web",
+  "spec_ref": "carousel_mobile_interpolation-spec-v1.0",
+  "language": "HTML/CSS/JavaScript",
+  "budget_tokens": 55000,
+  "tasks": [
+    {
+      "id": "T-01",
+      "name": "Update CSS: remove !important on mobile transform/opacity, remove .is-center rules",
+      "complexity": "low",
+      "budget_tokens": 10000,
+      "namespace": null,
+      "files": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/assets/css/carousel.css"
+      ],
+      "depends_on": [],
+      "context_pointers": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/assets/css/carousel.css:37-76"
+      ],
+      "covers": ["REQ-01", "REQ-07"],
+      "acceptance": "npx playwright test tests/visual/carousel-mobile.spec.js --grep 'scroll-snap|static|border-radius|smooth|arrows' --project=mobile"
+    },
+    {
+      "id": "T-02",
+      "name": "Add JS interpolateItems() with scroll listener + rAF, wire into initScrollMode/destroyScrollMode",
+      "complexity": "medium",
+      "budget_tokens": 25000,
+      "namespace": null,
+      "files": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/assets/js/carousel.js"
+      ],
+      "depends_on": ["T-01"],
+      "context_pointers": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/assets/js/carousel.js:106-155",
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/assets/js/carousel.js:162-206",
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/assets/js/carousel.js:224-245",
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/assets/js/carousel.js:360-377"
+      ],
+      "covers": ["REQ-02", "REQ-03", "REQ-04", "REQ-05", "REQ-06"],
+      "acceptance": "npx playwright test tests/visual/carousel-mobile.spec.js --project=mobile && npx playwright test tests/visual/carousel-mobile.spec.js --project=desktop"
+    },
+    {
+      "id": "T-03",
+      "name": "Rewrite tests for scroll-snap + interpolation behavior, regenerate visual baselines",
+      "complexity": "medium",
+      "budget_tokens": 20000,
+      "namespace": null,
+      "files": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/tests/visual/carousel-mobile.spec.js"
+      ],
+      "depends_on": ["T-01", "T-02"],
+      "context_pointers": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/tests/visual/carousel-mobile.spec.js:1-131",
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/.hoangsa/sessions/refactor/carousel-mobile-interpolation/TEST-SPEC.md:1-60"
+      ],
+      "covers": ["REQ-01", "REQ-02", "REQ-03", "REQ-04", "REQ-05", "REQ-06", "REQ-07"],
+      "acceptance": "npx playwright test tests/visual/carousel-mobile.spec.js && npx playwright test tests/visual/pages.spec.js --update-snapshots"
+    }
+  ]
+}
