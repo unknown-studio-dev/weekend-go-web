@@ -1,0 +1,61 @@
+{
+  "name": "refactor: Full 3D CoverFlow đa thiết bị",
+  "workspace_dir": "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web",
+  "spec_ref": "full-3d-coverflow-spec-v1.0",
+  "language": "javascript",
+  "budget_tokens": 68000,
+  "tasks": [
+    {
+      "id": "T-01",
+      "name": "Update carousel CSS — perspective 1200px both modes, min-height vh, overflow visible",
+      "complexity": "medium",
+      "budget_tokens": 15000,
+      "namespace": null,
+      "files": [
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/assets/css/carousel.css",
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/index.html",
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/src/index.src.html"
+      ],
+      "depends_on": [],
+      "context_pointers": [
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/assets/css/carousel.css:1-86",
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/index.html:685-798"
+      ],
+      "covers": ["REQ-03", "REQ-04"],
+      "acceptance": "grep -q 'perspective: 1200px' assets/css/carousel.css && grep -q 'overflow: visible' assets/css/carousel.css && grep -q 'min-height' assets/css/carousel.css && ! grep -q 'perspective: none' assets/css/carousel.css && grep -q 'overflow-x-clip' index.html && echo PASS || echo FAIL"
+    },
+    {
+      "id": "T-02",
+      "name": "Refactor carousel.js — 3D positions with translateZ, click side items, hover pause",
+      "complexity": "high",
+      "budget_tokens": 35000,
+      "namespace": null,
+      "files": [
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/assets/js/carousel.js"
+      ],
+      "depends_on": [],
+      "context_pointers": [
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/assets/js/carousel.js:1-276"
+      ],
+      "covers": ["REQ-01", "REQ-02", "REQ-05", "REQ-06", "REQ-07", "REQ-08"],
+      "acceptance": "grep -q 'translateZ' assets/js/carousel.js && grep -q 'POSITIONS_MOBILE' assets/js/carousel.js && grep -q 'mouseenter' assets/js/carousel.js && grep -q 'pointer-events' assets/js/carousel.js && grep -q 'scale: 1.1' assets/js/carousel.js && echo PASS || echo FAIL"
+    },
+    {
+      "id": "T-03",
+      "name": "Update Playwright tests for full 3D CoverFlow",
+      "complexity": "medium",
+      "budget_tokens": 18000,
+      "namespace": null,
+      "files": [
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/tests/visual/carousel-mobile.spec.js"
+      ],
+      "depends_on": ["T-01", "T-02"],
+      "context_pointers": [
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/tests/visual/carousel-mobile.spec.js:1-100",
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/.hoangsa/sessions/refactor/full-3d-coverflow/TEST-SPEC.md:1-50"
+      ],
+      "covers": ["REQ-01", "REQ-02", "REQ-03", "REQ-04", "REQ-05", "REQ-06", "REQ-07", "REQ-08"],
+      "acceptance": "grep -q 'translateZ' tests/visual/carousel-mobile.spec.js && grep -q 'mouseenter\\|hover' tests/visual/carousel-mobile.spec.js && grep -q 'pointer-events' tests/visual/carousel-mobile.spec.js && echo PASS || echo FAIL"
+    }
+  ]
+}
