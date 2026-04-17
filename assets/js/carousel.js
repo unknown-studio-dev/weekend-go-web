@@ -16,24 +16,24 @@ const SWIPE_DEADZONE_PX     = 10;
 const SWIPE_LOCK_RATIO      = 1.2;    // |dx|/|dy| threshold for horizontal lock
 
 // Hidden slot config
-const HIDDEN = { scale: 0.5, rotateY: 0, txRatio: 0, opacity: 0, zIndex: 0 };
+const HIDDEN = { scale: 0.5, rotateY: 0, txRatio: 0, translateZ: 0, opacity: 0, zIndex: 0 };
 
 // POSITIONS arrays — indexed by DOM slot 0..4 = positions -2, -1, 0, +1, +2
 // txRatio = translateX as fraction of carousel.offsetWidth (responsive)
 const POSITIONS_DESKTOP = [
-  { scale: 0.55, rotateY: 50,  txRatio: -0.38, opacity: 0.4, zIndex: 2  },
-  { scale: 0.75, rotateY: 45,  txRatio: -0.30, opacity: 0.7, zIndex: 5  },
-  { scale: 1.0,  rotateY: 0,   txRatio: 0,     opacity: 1.0, zIndex: 10 },
-  { scale: 0.75, rotateY: -45, txRatio: 0.30,  opacity: 0.7, zIndex: 5  },
-  { scale: 0.55, rotateY: -50, txRatio: 0.38,  opacity: 0.4, zIndex: 2  },
+  { scale: 0.7,  rotateY: 55,  txRatio: -0.38, translateZ: 0,   opacity: 0.4, zIndex: 2  },
+  { scale: 0.85, rotateY: 45,  txRatio: -0.25, translateZ: 50,  opacity: 0.8, zIndex: 5  },
+  { scale: 1.1,  rotateY: 0,   txRatio: 0,     translateZ: 150, opacity: 1.0, zIndex: 10 },
+  { scale: 0.85, rotateY: -45, txRatio: 0.25,  translateZ: 50,  opacity: 0.8, zIndex: 5  },
+  { scale: 0.7,  rotateY: -55, txRatio: 0.38,  translateZ: 0,   opacity: 0.4, zIndex: 2  },
 ];
 
-const POSITIONS_SCALE_CENTER = [
-  { scale: 0.5,  rotateY: 0, txRatio: 0,     opacity: 0,   zIndex: 0  },
-  { scale: 0.72, rotateY: 0, txRatio: -0.30, opacity: 0.6, zIndex: 5  },
-  { scale: 1.0,  rotateY: 0, txRatio: 0,     opacity: 1.0, zIndex: 10 },
-  { scale: 0.72, rotateY: 0, txRatio: 0.30,  opacity: 0.6, zIndex: 5  },
-  { scale: 0.5,  rotateY: 0, txRatio: 0,     opacity: 0,   zIndex: 0  },
+const POSITIONS_MOBILE = [
+  { scale: 0.5,  rotateY: 0,   txRatio: 0,     translateZ: 0,   opacity: 0,   zIndex: 0  },
+  { scale: 0.85, rotateY: 35,  txRatio: -0.28, translateZ: 30,  opacity: 0.7, zIndex: 5  },
+  { scale: 1.1,  rotateY: 0,   txRatio: 0,     translateZ: 120, opacity: 1.0, zIndex: 10 },
+  { scale: 0.85, rotateY: -35, txRatio: 0.28,  translateZ: 30,  opacity: 0.7, zIndex: 5  },
+  { scale: 0.5,  rotateY: 0,   txRatio: 0,     translateZ: 0,   opacity: 0,   zIndex: 0  },
 ];
 
 const carousel = document.getElementById("phone-carousel");
@@ -49,7 +49,7 @@ function getViewportMode() {
 }
 
 function getPositions() {
-  return getViewportMode() === 'coverflow' ? POSITIONS_DESKTOP : POSITIONS_SCALE_CENTER;
+  return getViewportMode() === 'coverflow' ? POSITIONS_DESKTOP : POSITIONS_MOBILE;
 }
 
 function getPosition(domIndex) {
@@ -110,9 +110,25 @@ function applyPositions(transition) {
       ? `transform ${ANIMATION_DURATION_MS}ms cubic-bezier(0.4, 0, 0.2, 1), opacity ${ANIMATION_DURATION_MS}ms cubic-bezier(0.4, 0, 0.2, 1)`
       : 'none';
     const tx = Math.round(pos.txRatio * carousel.offsetWidth);
-    phone.style.transform = `translate(-50%, -50%) translateX(${tx}px) scale(${pos.scale}) rotateY(${pos.rotateY}deg)`;
+    phone.style.transform = `translate(-50%, -50%) translateX(${tx}px) translateZ(${pos.translateZ}px) scale(${pos.scale}) rotateY(${pos.rotateY}deg)`;
     phone.style.opacity = pos.opacity;
     phone.style.zIndex = pos.zIndex;
+    // pointer-events + cursor based on visibility/position
+    if (pos.opacity === 0) {
+      phone.style.pointerEvents = 'none';
+      phone.onclick = null;
+    } else if (domIndex !== 2) {
+      // Side items: click to navigate
+      phone.style.pointerEvents = 'auto';
+      phone.style.cursor = 'pointer';
+      const dir = domIndex < 2 ? -1 : 1;
+      phone.onclick = () => { if (dir < 0) goPrev(); else goNext(); resetAutoPlay(); };
+    } else {
+      // Center item
+      phone.style.pointerEvents = 'auto';
+      phone.style.cursor = 'default';
+      phone.onclick = null;
+    }
   });
   // Expose state for tests
   carousel.dataset.centerIndex = String(centerIndex);
@@ -134,7 +150,7 @@ function goTo(newCenter, direction) {
     const fromPos = getPosition(fromIdx);
     phone.style.transition = 'none';
     const tx = Math.round(fromPos.txRatio * carousel.offsetWidth);
-    phone.style.transform = `translate(-50%, -50%) translateX(${tx}px) scale(${fromPos.scale}) rotateY(${fromPos.rotateY}deg)`;
+    phone.style.transform = `translate(-50%, -50%) translateX(${tx}px) translateZ(${fromPos.translateZ}px) scale(${fromPos.scale}) rotateY(${fromPos.rotateY}deg)`;
     phone.style.opacity = fromPos.opacity;
     phone.style.zIndex = getPosition(domIndex).zIndex;
   });
@@ -219,7 +235,7 @@ carousel.addEventListener('touchstart', handleTouchStart, { passive: true });
 carousel.addEventListener('touchmove',  handleTouchMove,  { passive: true });
 carousel.addEventListener('touchend',   handleTouchEnd,   { passive: true });
 
-// Resize — debounced, re-apply layout when viewport mode changes
+// Resize — debounced, re-apply layout on any resize
 let lastViewportMode = getViewportMode();
 let resizeTimer = null;
 function handleResize() {
@@ -228,9 +244,9 @@ function handleResize() {
     const current = getViewportMode();
     if (current !== lastViewportMode) {
       lastViewportMode = current;
-      reorderDOM();
-      applyPositions(false);
     }
+    reorderDOM();
+    applyPositions(false);
   }, 150);
 }
 window.addEventListener('resize', handleResize);
@@ -253,6 +269,10 @@ function resetAutoPlay() {
   startAutoPlay();
 }
 startAutoPlay();
+
+// Pause autoplay on hover
+carousel.addEventListener('mouseenter', stopAutoPlay);
+carousel.addEventListener('mouseleave', () => { if (!isPaused) startAutoPlay(); });
 
 // Reduced-motion change listener — re-apply (no-op for mobile since it's already flat)
 reducedMotionMQ.addEventListener('change', (e) => {
