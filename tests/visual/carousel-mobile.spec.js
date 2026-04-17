@@ -27,7 +27,7 @@ test('mobile: dots exist and one is active', async ({ page: p }) => {
   expect(active).toBe(1);
 });
 
-// --- Scale Center tests (mobile viewport, transform-based) ---
+// --- CoverFlow tests (mobile viewport, 3D transform-based) ---
 
 test('scale-center: items are absolute positioned', async ({ page: p }) => {
   test.skip(test.info().project.name !== 'mobile');
@@ -88,23 +88,10 @@ test('scale-center: side items have reduced scale', async ({ page: p }) => {
   });
 });
 
-test('scale-center: no rotateY', async ({ page: p }) => {
+test('scale-center: viewport mode is coverflow', async ({ page: p }) => {
   test.skip(test.info().project.name !== 'mobile');
   await setup(p);
-  const hasRotateY = await p.evaluate(() => {
-    const items = Array.from(document.querySelectorAll('#phone-carousel .phone-item'));
-    return items.some(item => {
-      const transform = item.style.transform || getComputedStyle(item).transform;
-      return /rotateY\s*\(\s*(?!0deg|0rad|0turn|0grad)/.test(transform);
-    });
-  });
-  expect(hasRotateY).toBe(false);
-});
-
-test('scale-center: viewport mode is scale-center', async ({ page: p }) => {
-  test.skip(test.info().project.name !== 'mobile');
-  await setup(p);
-  await expect(p.locator('#phone-carousel')).toHaveAttribute('data-viewport-mode', 'scale-center');
+  await expect(p.locator('#phone-carousel')).toHaveAttribute('data-viewport-mode', 'coverflow');
 });
 
 test('scale-center: prev/next buttons visible', async ({ page: p }) => {
@@ -124,11 +111,41 @@ test('scale-center: dots clickable', async ({ page: p }) => {
   expect(pointerEvents).not.toBe('none');
 });
 
-test('scale-center: perspective is none', async ({ page: p }) => {
+// --- Mobile 3D CoverFlow tests ---
+
+test('mobile: 3D perspective active', async ({ page: p }) => {
   test.skip(test.info().project.name !== 'mobile');
   await setup(p);
   const perspective = await p.evaluate(() => getComputedStyle(document.getElementById('phone-carousel')).perspective);
-  expect(perspective === 'none' || perspective === '').toBeTruthy();
+  expect(perspective).toBe('1200px');
+});
+
+test('mobile: side items have rotateY', async ({ page: p }) => {
+  test.skip(test.info().project.name !== 'mobile');
+  await setup(p);
+  const hasRotateY = await p.evaluate(() => {
+    const items = Array.from(document.querySelectorAll('#phone-carousel .phone-item'));
+    return [1, 3].some(i => {
+      const item = items[i];
+      if (!item) return false;
+      const transform = item.style.transform || getComputedStyle(item).transform;
+      return /rotateY\s*\(\s*(?!0deg|0rad|0turn|0grad)/.test(transform);
+    });
+  });
+  expect(hasRotateY).toBe(true);
+});
+
+test('mobile: center has translateZ', async ({ page: p }) => {
+  test.skip(test.info().project.name !== 'mobile');
+  await setup(p);
+  const hasTranslateZ = await p.evaluate(() => {
+    const items = Array.from(document.querySelectorAll('#phone-carousel .phone-item'));
+    const centerItem = items[2];
+    if (!centerItem) return false;
+    const transform = centerItem.style.transform || getComputedStyle(centerItem).transform;
+    return /translateZ/.test(transform);
+  });
+  expect(hasTranslateZ).toBe(true);
 });
 
 // --- Desktop tests ---
@@ -172,6 +189,94 @@ test('desktop: perspective is set', async ({ page: p }) => {
   await setup(p);
   const perspective = await p.evaluate(() => getComputedStyle(document.getElementById('phone-carousel')).perspective);
   expect(perspective !== 'none' && perspective !== '').toBeTruthy();
+});
+
+test('desktop: center has translateZ(150px)', async ({ page: p }) => {
+  test.skip(test.info().project.name !== 'desktop');
+  await setup(p);
+  const hasTranslateZ150 = await p.evaluate(() => {
+    const items = Array.from(document.querySelectorAll('#phone-carousel .phone-item'));
+    const centerItem = items[2];
+    if (!centerItem) return false;
+    const transform = centerItem.style.transform || getComputedStyle(centerItem).transform;
+    return /translateZ\s*\(\s*150px\s*\)/.test(transform);
+  });
+  expect(hasTranslateZ150).toBe(true);
+});
+
+test('desktop: perspective is 1200px', async ({ page: p }) => {
+  test.skip(test.info().project.name !== 'desktop');
+  await setup(p);
+  const perspective = await p.evaluate(() => getComputedStyle(document.getElementById('phone-carousel')).perspective);
+  expect(perspective).toBe('1200px');
+});
+
+// --- Interaction tests ---
+
+test('click side item navigates', async ({ page: p }) => {
+  test.skip(test.info().project.name !== 'desktop');
+  await setup(p);
+  const initialIndex = await p.evaluate(() => {
+    const carousel = document.getElementById('phone-carousel');
+    return parseInt(carousel.dataset.centerIndex || carousel.getAttribute('data-center-index') || '2');
+  });
+  // Click the right side item (index 3)
+  await p.evaluate(() => {
+    const items = Array.from(document.querySelectorAll('#phone-carousel .phone-item'));
+    const rightItem = items[3];
+    if (rightItem) rightItem.click();
+  });
+  await p.waitForTimeout(500);
+  const newIndex = await p.evaluate(() => {
+    const carousel = document.getElementById('phone-carousel');
+    return parseInt(carousel.dataset.centerIndex || carousel.getAttribute('data-center-index') || '2');
+  });
+  expect(newIndex).not.toBe(initialIndex);
+});
+
+test('hover pauses autoplay', async ({ page: p }) => {
+  test.skip(test.info().project.name !== 'desktop');
+  await setup(p);
+  const carousel = p.locator('#phone-carousel');
+  const indexBefore = await p.evaluate(() => {
+    const el = document.getElementById('phone-carousel');
+    return parseInt(el.dataset.centerIndex || el.getAttribute('data-center-index') || '2');
+  });
+  // Hover over carousel to pause autoplay
+  await carousel.dispatchEvent('mouseenter');
+  await p.waitForTimeout(3500);
+  const indexAfter = await p.evaluate(() => {
+    const el = document.getElementById('phone-carousel');
+    return parseInt(el.dataset.centerIndex || el.getAttribute('data-center-index') || '2');
+  });
+  expect(indexAfter).toBe(indexBefore);
+});
+
+test('hidden items have pointer-events none', async ({ page: p }) => {
+  test.skip(test.info().project.name !== 'mobile');
+  await setup(p);
+  const pointerEvents = await p.evaluate(() => {
+    const items = Array.from(document.querySelectorAll('#phone-carousel .phone-item'));
+    return [0, 4].map(i => {
+      const item = items[i];
+      return item ? getComputedStyle(item).pointerEvents : null;
+    });
+  });
+  pointerEvents.forEach(pe => {
+    if (pe !== null) expect(pe).toBe('none');
+  });
+});
+
+test('overflow visible on carousel', async ({ page: p }) => {
+  await setup(p);
+  const overflow = await p.evaluate(() => getComputedStyle(document.getElementById('phone-carousel')).overflow);
+  expect(overflow).toBe('visible');
+});
+
+test('container uses min-height', async ({ page: p }) => {
+  await setup(p);
+  const minHeight = await p.evaluate(() => getComputedStyle(document.getElementById('phone-carousel')).minHeight);
+  expect(minHeight).toContain('vh');
 });
 
 // --- Image order tests ---
