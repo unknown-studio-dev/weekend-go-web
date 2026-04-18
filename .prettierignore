@@ -1,0 +1,7 @@
+node_modules/
+.gitnexus/
+.hoangsa/
+.claude/
+test-results/
+assets/css/styles.css
+package-lock.json

@@ -9,7 +9,7 @@ module.exports = defineConfig({
     screenshot: 'only-on-failure',
   },
   webServer: {
-    command: 'npx serve -l 5173 .',
+    command: 'npm run build && npx serve -l 5173 .',
     url: 'http://127.0.0.1:5173',
     reuseExistingServer: !process.env.CI,
     timeout: 30_000,

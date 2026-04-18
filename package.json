@@ -8,9 +8,13 @@
     "build:html": "node scripts/build-html.js",
     "build": "npm run build:css && npm run build:html",
     "dev:css": "tailwindcss -i ./src/input.css -o ./assets/css/styles.css --watch",
-    "dev": "npm run build:html && npm run dev:css",
+    "dev": "concurrently \"npm run dev:css\" \"npx serve -l 3000 .\"",
     "test:visual": "playwright test",
-    "test:visual:update": "playwright test --update-snapshots"
+    "test:visual:update": "playwright test --update-snapshots",
+    "lint": "eslint assets/js/**/*.js scripts/**/*.js",
+    "format": "prettier --write \"assets/js/**/*.js\" \"scripts/**/*.js\" \"src/**/*.css\"",
+    "format:check": "prettier --check \"assets/js/**/*.js\" \"scripts/**/*.js\" \"src/**/*.css\"",
+    "prepare": "husky"
   },
   "engines": {
     "node": ">=18"
@@ -28,8 +32,19 @@
   },
   "homepage": "https://github.com/studium-ignotum/weekend-go-web#readme",
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.2",
     "@playwright/test": "^1.59.1",
+    "concurrently": "^9.2.1",
+    "eslint": "^10.2.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "prettier": "^3.8.3",
     "serve": "^14.2.6",
     "tailwindcss": "^3.4.19"
+  },
+  "lint-staged": {
+    "assets/js/**/*.js": ["eslint --fix", "prettier --write"],
+    "scripts/**/*.js": ["eslint --fix", "prettier --write"],
+    "src/**/*.css": ["prettier --write"]
   }
 }

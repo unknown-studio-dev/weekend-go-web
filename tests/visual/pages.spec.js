@@ -12,9 +12,10 @@ for (const page of PAGES) {
     await p.goto(page.path);
     await p.evaluate(() => document.fonts.ready);
     await p.waitForLoadState('networkidle');
+    // Pause carousel autoplay to get consistent screenshots
     await p.evaluate(() => {
-      const toggle = document.getElementById('carousel-toggle');
-      if (toggle && toggle.dataset.state === 'playing') toggle.click();
+      const carousel = document.getElementById('phone-carousel');
+      if (carousel) carousel.dispatchEvent(new Event('mouseenter'));
     });
     await expect(p).toHaveScreenshot(`${page.name}.png`, { fullPage: true });
   });

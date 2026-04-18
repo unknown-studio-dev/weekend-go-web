@@ -1,0 +1,43 @@
+{
+  "name": "fix: Bỏ khung cắt hình carousel, thêm blur fade-out",
+  "workspace_dir": "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web",
+  "spec_ref": "carousel_image_frame-spec-v1.0",
+  "language": "HTML, CSS, TailwindCSS",
+  "budget_tokens": 23000,
+  "tasks": [
+    {
+      "id": "T-01",
+      "name": "Remove frame styling and add mask-image fade-out on carousel images",
+      "complexity": "low",
+      "budget_tokens": 15000,
+      "namespace": null,
+      "files": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/assets/css/carousel.css"
+      ],
+      "depends_on": [],
+      "context_pointers": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/assets/css/carousel.css:1-130",
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/src/index.src.html:762-838"
+      ],
+      "covers": ["REQ-01", "REQ-02", "REQ-03", "REQ-04", "REQ-06"],
+      "acceptance": "grep -q 'border: none' assets/css/carousel.css && grep -q 'mask-image' assets/css/carousel.css && ! grep -q 'border-radius: 1.75rem' assets/css/carousel.css && echo PASS || echo FAIL"
+    },
+    {
+      "id": "T-02",
+      "name": "Verify carousel navigation still works after CSS changes",
+      "complexity": "low",
+      "budget_tokens": 8000,
+      "namespace": null,
+      "files": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/assets/css/carousel.css"
+      ],
+      "depends_on": ["T-01"],
+      "context_pointers": [
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/assets/css/carousel.css:1-130",
+        "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/assets/js/carousel.js:1-50"
+      ],
+      "covers": ["REQ-05"],
+      "acceptance": "grep -q '.phone-item img' assets/css/carousel.css && ! grep -q 'border-radius: 2' assets/css/carousel.css && echo PASS || echo FAIL"
+    }
+  ]
+}

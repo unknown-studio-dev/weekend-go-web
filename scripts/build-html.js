@@ -38,7 +38,7 @@ function build() {
     console.error(`src/ directory not found at ${SRC_DIR}`);
     process.exit(1);
   }
-  const sources = fs.readdirSync(SRC_DIR).filter(f => f.endsWith('.src.html'));
+  const sources = fs.readdirSync(SRC_DIR).filter((f) => f.endsWith('.src.html'));
   if (!sources.length) {
     console.warn('No *.src.html found in src/');
     return;

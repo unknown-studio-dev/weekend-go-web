@@ -1,0 +1,14 @@
+{
+  "task_type": "fix",
+  "status": "cooking",
+  "session_id": "fix/cta-buttons-center-horizontal",
+  "tasks": [
+    {
+      "id": "T-01",
+      "name": "Fix CTA buttons flex layout — horizontal + centered",
+      "files": ["src/index.src.html", "index.html"],
+      "acceptance": "grep -c 'flex-row flex-wrap' src/index.src.html | grep -q '2'",
+      "status": "done"
+    }
+  ]
+}

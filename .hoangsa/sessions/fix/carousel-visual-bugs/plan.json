@@ -1,0 +1,28 @@
+{
+  "name": "fix: 3 carousel visual bugs — mobile overlap, desktop spacing, button position",
+  "workspace_dir": "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web",
+  "spec_ref": "carousel-visual-bugs-spec-v1.0",
+  "language": "javascript",
+  "budget_tokens": 15000,
+  "tasks": [
+    {
+      "id": "T-01",
+      "name": "Fix carousel visual bugs — txRatio values + button parent relative",
+      "complexity": "low",
+      "budget_tokens": 15000,
+      "namespace": null,
+      "files": [
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/assets/js/carousel.js",
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/index.html",
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/src/index.src.html"
+      ],
+      "depends_on": [],
+      "context_pointers": [
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/assets/js/carousel.js:23-37",
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/index.html:699-712"
+      ],
+      "covers": ["REQ-01", "REQ-02", "REQ-03"],
+      "acceptance": "grep 'txRatio: -0.30' assets/js/carousel.js && grep 'txRatio: 0.30' assets/js/carousel.js && grep 'txRatio: -0.38' assets/js/carousel.js && grep -B1 'id=\"carousel-prev\"' index.html | grep -q 'relative' && echo PASS || echo FAIL"
+    }
+  ]
+}

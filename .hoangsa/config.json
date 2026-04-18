@@ -1,7 +1,7 @@
 {
   "preferences": {
     "auto_plate": false,
-    "auto_serve": null,
+    "auto_serve": true,
     "auto_taste": true,
     "interaction_level": null,
     "lang": "vi",

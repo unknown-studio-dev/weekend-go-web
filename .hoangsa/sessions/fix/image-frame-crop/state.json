@@ -1,0 +1,25 @@
+{
+  "created_at": "2026-04-16T08:54:21.101Z",
+  "current_command": null,
+  "language": "en",
+  "preferences": {
+    "auto_plate": null,
+    "auto_serve": null,
+    "auto_taste": null
+  },
+  "session_id": "fix/image-frame-crop",
+  "stack": "",
+  "status": "cooked",
+  "task_type": "feat",
+  "tasks": [
+    {
+      "id": "T-01",
+      "status": "done"
+    },
+    {
+      "id": "T-02",
+      "status": "done"
+    }
+  ],
+  "updated_at": "2026-04-16T09:10:47.127Z"
+}

@@ -1,0 +1,75 @@
+{
+  "name": "feat: Responsive carousel — CoverFlow Desktop + Scale Center Mobile",
+  "workspace_dir": "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web",
+  "spec_ref": "responsive-carousel-spec-v1.0",
+  "language": "javascript",
+  "budget_tokens": 83000,
+  "tasks": [
+    {
+      "id": "T-01",
+      "name": "Reorder carousel images in HTML (items 6-8)",
+      "complexity": "low",
+      "budget_tokens": 8000,
+      "namespace": null,
+      "files": [
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/index.html",
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/src/index.src.html"
+      ],
+      "depends_on": [],
+      "context_pointers": [
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/index.html:710-785"
+      ],
+      "covers": ["REQ-08"],
+      "acceptance": "grep -n 'preview-' index.html | head -8 | awk -F: '{print NR, $2}' | grep -q 'create-post.*weekend-plan.*plan-list' && echo PASS || (echo 'Expected order: ...create-post, weekend-plan, plan-list' && exit 1)"
+    },
+    {
+      "id": "T-02",
+      "name": "Update carousel.css — remove scroll-snap, conditional perspective",
+      "complexity": "medium",
+      "budget_tokens": 15000,
+      "namespace": null,
+      "files": [
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/assets/css/carousel.css"
+      ],
+      "depends_on": [],
+      "context_pointers": [
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/assets/css/carousel.css:1-130"
+      ],
+      "covers": ["REQ-01", "REQ-02", "REQ-06", "REQ-07"],
+      "acceptance": "! grep -q 'scroll-snap' assets/css/carousel.css && ! grep -q 'overflow-x' assets/css/carousel.css && grep -q 'perspective: 3000px' assets/css/carousel.css && grep -q 'perspective: none' assets/css/carousel.css && echo PASS || echo FAIL"
+    },
+    {
+      "id": "T-03",
+      "name": "Refactor carousel.js — Scale Center positions + remove scroll-snap logic",
+      "complexity": "high",
+      "budget_tokens": 35000,
+      "namespace": null,
+      "files": [
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/assets/js/carousel.js"
+      ],
+      "depends_on": [],
+      "context_pointers": [
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/assets/js/carousel.js:1-464"
+      ],
+      "covers": ["REQ-01", "REQ-02", "REQ-03", "REQ-04", "REQ-05", "REQ-07", "REQ-09"],
+      "acceptance": "! grep -q 'initScrollMode\\|destroyScrollMode\\|scrollToIndex\\|isScrollMode\\|cloneFirst\\|cloneLast' assets/js/carousel.js && grep -q 'POSITIONS_SCALE_CENTER' assets/js/carousel.js && grep -q 'scale-center' assets/js/carousel.js && echo PASS || echo FAIL"
+    },
+    {
+      "id": "T-04",
+      "name": "Update Playwright tests — remove scroll-snap tests, add Scale Center tests",
+      "complexity": "medium",
+      "budget_tokens": 25000,
+      "namespace": null,
+      "files": [
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cu��i tu��n đi đâu/weekend-go-web/tests/visual/carousel-mobile.spec.js"
+      ],
+      "depends_on": ["T-01", "T-02", "T-03"],
+      "context_pointers": [
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/tests/visual/carousel-mobile.spec.js:1-189",
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/.hoangsa/sessions/feat/responsive-carousel-scale-center/TEST-SPEC.md:1-50"
+      ],
+      "covers": ["REQ-01", "REQ-02", "REQ-03", "REQ-04", "REQ-05", "REQ-06", "REQ-07", "REQ-08", "REQ-09"],
+      "acceptance": "! grep -q 'scroll-snap active\\|items are static\\|item width ~75%\\|scroll-behavior is smooth\\|arrows hidden\\|clones exist' tests/visual/carousel-mobile.spec.js && grep -q 'scale-center' tests/visual/carousel-mobile.spec.js && grep -q 'coverflow' tests/visual/carousel-mobile.spec.js && echo PASS || echo FAIL"
+    }
+  ]
+}

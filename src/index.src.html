@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self';" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; font-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self';" />
     <title>Cuối Tuần Đi Đâu? - Gợi ý cuối tuần cho gia đình</title>
     <meta
       name="description"
@@ -207,10 +207,11 @@
 
               <!-- CTAs -->
               <div
-                class="mt-8 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start"
+                class="mt-8 flex flex-row flex-wrap gap-3 items-center justify-center lg:justify-start"
               >
                 <a
                   href="https://testflight.apple.com/join/abfrzXm7"
+                  rel="noopener noreferrer"
                   class="inline-block hover:opacity-80 transition-opacity"
                 >
                   <img
@@ -221,14 +222,14 @@
                   />
                 </a>
                 <a
-                  href="https://github.com/studium-ignotum/weekend-go-android-distribution/releases/download/v{{APK_VERSION}}/release.apk"
+                  href="https://github.com/unknown-studio-dev/weekend-go-android-distribution/releases/download/v{{APK_VERSION}}/release.apk"
+                  rel="noopener noreferrer"
                   class="inline-block hover:opacity-80 transition-opacity"
                 >
                   <img
                     src="assets/logos/GetItOnGooglePlay_Badge_Web_color_Vietnamese.svg"
                     alt="Tải ứng dụng trên Google Play"
                     width="162" height="48"
-                    loading="lazy"
                     class="h-12 w-auto"
                   />
                 </a>
@@ -728,7 +729,7 @@
       </section>
 
       <!-- Screenshots Gallery -->
-      <section class="py-16 lg:py-24 bg-gray-50 overflow-hidden">
+      <section class="py-16 lg:py-24 bg-gray-50 overflow-x-clip">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-20">
           <!-- Header -->
           <div class="text-center mb-12">
@@ -745,14 +746,12 @@
           </div>
 
           <!-- Phone Mockups Carousel -->
-          <div
-            class="relative flex justify-center items-center px-12 sm:px-16 lg:px-24"
-          >
+          <div class="relative">
             <!-- Prev Button -->
             <button
               id="carousel-prev"
               aria-label="Ảnh trước"
-              class="absolute left-0 sm:left-2 lg:left-8 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/80 backdrop-blur-sm shadow-lg flex items-center justify-center hover:bg-white hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer"
+              class="absolute top-1/2 -translate-y-1/2 left-0 lg:-left-6 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/80 backdrop-blur-sm shadow-lg flex items-center justify-center hover:bg-white hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer"
             >
               <svg aria-hidden="true" class="w-5 h-5 sm:w-6 sm:h-6 text-gray-700">
                 <use href="#icon-carousel-prev"/>
@@ -764,76 +763,28 @@
               class="relative w-full max-w-lg sm:max-w-2xl lg:max-w-5xl mx-auto"
             >
               <div class="phone-item absolute">
-                <img
-                  src="assets/images/preview-venue-detail.png"
-                  alt="Chi tiết địa điểm"
-                  width="1170"
-                  height="2532"
-                  loading="lazy"
-                />
+                <img src="assets/images/preview-venue-detail.png" alt="Chi tiết địa điểm" width="1170" height="2532" loading="lazy" />
               </div>
               <div class="phone-item absolute">
-                <img
-                  src="assets/images/preview-newsfeed.png"
-                  alt="Giao diện ứng dụng"
-                  width="1170"
-                  height="2532"
-                  loading="lazy"
-                />
+                <img src="assets/images/preview-newsfeed.png" alt="Giao diện ứng dụng" width="1170" height="2532" loading="lazy" />
               </div>
               <div class="phone-item absolute">
-                <img
-                  src="assets/images/preview-user-profile.png"
-                  alt="Hồ sơ người dùng"
-                  width="750"
-                  height="1624"
-                  loading="lazy"
-                />
+                <img src="assets/images/preview-user-profile.png" alt="Hồ sơ người dùng" width="750" height="1624" loading="lazy" />
               </div>
               <div class="phone-item absolute">
-                <img
-                  src="assets/images/preview-share-review.jpeg"
-                  alt="Chia sẻ trải nghiệm"
-                  width="1170"
-                  height="2532"
-                  loading="lazy"
-                />
+                <img src="assets/images/preview-share-review.jpeg" alt="Chia sẻ trải nghiệm" width="1170" height="2532" loading="lazy" />
               </div>
               <div class="phone-item absolute">
-                <img
-                  src="assets/images/preview-AI-review.png"
-                  alt="Tổng hợp mẹo từ AI"
-                  width="1170"
-                  height="2532"
-                  loading="lazy"
-                />
+                <img src="assets/images/preview-AI-review.png" alt="Tổng hợp mẹo từ AI" width="1170" height="2532" loading="lazy" />
               </div>
               <div class="phone-item absolute">
-                <img
-                  src="assets/images/preview-weekend-plan.png"
-                  alt="Lập kế hoạch cuối tuần"
-                  width="1170"
-                  height="2532"
-                  loading="lazy"
-                />
+                <img src="assets/images/preview-create-post.png" alt="Tạo bài đăng" width="1500" height="3248" loading="lazy" />
               </div>
               <div class="phone-item absolute">
-                <img
-                  src="assets/images/preview-plan-list.png"
-                  alt="Bộ sưu tập kế hoạch"
-                  width="1170"
-                  height="2532"
-                  loading="lazy"
-                />
+                <img src="assets/images/preview-weekend-plan.png" alt="Lập kế hoạch cuối tuần" width="1170" height="2532" loading="lazy" />
               </div>
               <div class="phone-item absolute">
-                <img
-                  src="assets/images/preview-create-post.png"
-                  alt="Tạo bài chia sẻ"
-                  width="1500"
-                  height="3248"
-                  loading="lazy"
-                />
+                <img src="assets/images/preview-plan-list.png" alt="Bộ sưu tập kế hoạch" width="1170" height="2532" loading="lazy" />
               </div>
             </div>
 
@@ -841,13 +792,14 @@
             <button
               id="carousel-next"
               aria-label="Ảnh tiếp"
-              class="absolute right-0 sm:right-2 lg:right-8 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/80 backdrop-blur-sm shadow-lg flex items-center justify-center hover:bg-white hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer"
+              class="absolute top-1/2 -translate-y-1/2 right-0 lg:-right-6 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/80 backdrop-blur-sm shadow-lg flex items-center justify-center hover:bg-white hover:scale-110 active:scale-95 transition-all duration-200 cursor-pointer"
             >
               <svg aria-hidden="true" class="w-5 h-5 sm:w-6 sm:h-6 text-gray-700">
                 <use href="#icon-carousel-next"/>
               </svg>
             </button>
           </div>
+
         </div>
       </section>
 
@@ -981,9 +933,10 @@
             Bắt đầu lên kế hoạch cuối tuần cho gia đình bạn. Hoàn toàn miễn phí.
           </p>
 
-          <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+          <div class="mt-8 flex flex-row flex-wrap items-center gap-3 justify-center">
             <a
               href="https://testflight.apple.com/join/abfrzXm7"
+              rel="noopener noreferrer"
               class="inline-block hover:opacity-90 transition-opacity"
             >
               <img
@@ -991,11 +944,12 @@
                 alt="Tải về từ App Store"
                 width="144" height="48"
                 loading="lazy"
-                class="h-12 w-auto"
+                class="h-14 w-auto"
               />
             </a>
             <a
-              href="https://github.com/studium-ignotum/weekend-go-android-distribution/releases/download/v{{APK_VERSION}}/release.apk"
+              href="https://github.com/unknown-studio-dev/weekend-go-android-distribution/releases/download/v{{APK_VERSION}}/release.apk"
+              rel="noopener noreferrer"
               class="inline-block hover:opacity-90 transition-opacity"
             >
               <img
@@ -1003,7 +957,7 @@
                 alt="Tải ứng dụng trên Google Play"
                 width="162" height="48"
                 loading="lazy"
-                class="h-12 w-auto"
+                class="h-14 w-auto"
               />
             </a>
           </div>

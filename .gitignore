@@ -4,6 +4,8 @@ CLAUDE.md
 node_modules/
 .env
 .env.*
-.claude/
+**/.claude/
 test-results/
 playwright-report/
+.husky/
+.hoangsa/

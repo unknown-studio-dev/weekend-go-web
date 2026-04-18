@@ -1,0 +1,25 @@
+{
+  "acceptance": [
+    "node -e \"const c = require('fs').readFileSync('assets/css/carousel.css','utf8'); const checks = ['touch-action: pan-y','height: 360px','15rem','carousel-dot','prefers-reduced-motion']; checks.forEach(k => { if (!c.includes(k)) { console.error('MISSING:', k); process.exit(1); } }); if (!/max-width:\\s*479px/.test(c)) { console.error('MISSING mobile arrows hide'); process.exit(1); } console.log('OK');\""
+  ],
+  "conventions_subset": {
+    "async_pattern": "async/await",
+    "error_handling": "try-catch + { error } return",
+    "naming": "camelCase functions, snake_case JSON",
+    "test_framework": "node:test"
+  },
+  "dependency_signatures": [],
+  "description": "Update carousel.css — heights, mobile image width, touch-action, hide mobile arrows, dots, reduced-motion",
+  "estimated_tokens": 602,
+  "file_segments": [
+    {
+      "action": "MODIFY",
+      "end_line": 54,
+      "lines": "#phone-carousel {\n  perspective: 3000px;\n  transform-style: preserve-3d;\n  height: 440px;\n}\n@media (min-width: 640px) {\n  #phone-carousel { height: 500px; }\n}\n@media (min-width: 1024px) {\n  #phone-carousel { height: 580px; }\n}\n.phone-item {\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  transform-origin: center center;\n  will-change: transform, opacity;\n}\n.phone-item img {\n  width: 10rem;\n  height: auto;\n  border: 3px solid #1d1d1f;\n  border-radius: 1.75rem;\n  background: #000;\n  box-shadow:\n    inset 0 0 0 1px rgba(255, 255, 255, 0.08),\n    0 0 0 1px rgba(0, 0, 0, 0.35);\n  image-rendering: -webkit-optimize-contrast;\n  backface-visibility: hidden;\n  transform: translateZ(0);\n  filter:\n    contrast(1.04)\n    saturate(1.05)\n    drop-shadow(0 25px 25px rgba(0, 0, 0, 0.15));\n}\n@media (min-width: 640px) {\n  .phone-item img {\n    width: 14rem;\n    border-width: 4px;\n    border-radius: 2.25rem;\n  }\n}\n@media (min-width: 1024px) {\n  .phone-item img {\n    width: 18rem;\n    border-width: 5px;\n    border-radius: 2.75rem;\n  }\n}\n@media (prefers-reduced-motion: reduce) {\n  .phone-item {\n    transition: none !important;\n  }\n}\n",
+      "path": "/Users/thuylenguyenmai/Desktop/Projects/Cuối tuần đi đâu/weekend-go-web/assets/css/carousel.css",
+      "start_line": 1
+    }
+  ],
+  "task_id": "T-02",
+  "task_name": "Update carousel.css — heights, mobile image width, touch-action, hide mobile arrows, dots, reduced-motion"
+}

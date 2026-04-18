@@ -1,0 +1,44 @@
+{
+  "name": "fix: 5 CoverFlow visual bugs — buttons, center size, spacing, height, dots",
+  "workspace_dir": "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web",
+  "spec_ref": "coverflow-5-visual-bugs-spec-v1.0",
+  "language": "javascript",
+  "budget_tokens": 40000,
+  "tasks": [
+    {
+      "id": "T-01",
+      "name": "Fix carousel JS — position values + remove dots functions",
+      "complexity": "medium",
+      "budget_tokens": 20000,
+      "namespace": null,
+      "files": [
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/assets/js/carousel.js"
+      ],
+      "depends_on": [],
+      "context_pointers": [
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/assets/js/carousel.js:1-296"
+      ],
+      "covers": ["REQ-02", "REQ-03", "REQ-05"],
+      "acceptance": "! grep -q 'scale: 1.1' assets/js/carousel.js && grep -q 'txRatio: 0.22' assets/js/carousel.js && grep -q 'txRatio: -0.44' assets/js/carousel.js && ! grep -q 'buildDots' assets/js/carousel.js && ! grep -q 'updateDots' assets/js/carousel.js && echo PASS || echo FAIL"
+    },
+    {
+      "id": "T-02",
+      "name": "Fix CSS + HTML — height, button position, remove dots",
+      "complexity": "medium",
+      "budget_tokens": 20000,
+      "namespace": null,
+      "files": [
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/assets/css/carousel.css",
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/index.html",
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/src/index.src.html"
+      ],
+      "depends_on": [],
+      "context_pointers": [
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/assets/css/carousel.css:1-82",
+        "/Users/thuylenguyenmai/Desktop/Workspace/UNK-Cuối tuần đi đâu/weekend-go-web/index.html:699-797"
+      ],
+      "covers": ["REQ-01", "REQ-04", "REQ-05"],
+      "acceptance": "grep -q 'top-1/2' index.html && ! grep -q 'min-height' assets/css/carousel.css && grep -q 'height: 580px' assets/css/carousel.css && ! grep -q 'carousel-dots' index.html && ! grep -q 'carousel-dot' assets/css/carousel.css && echo PASS || echo FAIL"
+    }
+  ]
+}

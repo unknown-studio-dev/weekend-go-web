@@ -1,0 +1,13 @@
+{
+  "task_type": "fix",
+  "status": "cooking",
+  "tasks": [
+    {
+      "id": "T-01",
+      "name": "Restore POSITIONS_DESKTOP scale values to original (center 1.0, sides 0.75, far 0.55)",
+      "files": ["assets/js/carousel.js"],
+      "acceptance": "npx playwright test --grep 'desktop.*center\\|desktop.*visible\\|desktop.*scale' 2>&1 | tail -5",
+      "status": "done"
+    }
+  ]
+}
